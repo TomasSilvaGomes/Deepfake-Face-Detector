@@ -1,0 +1,13 @@
+{
+    "dataset": "DeepFakeFace (OpenRL/DeepFakeFace)",
+    "referencia": "Song et al., arXiv:2309.02218",
+    "n_real": 1000,
+    "n_fake": 1000,
+    "n_total": 2000,
+    "auc": 0.7825175,
+    "accuracy": 0.6575,
+    "threshold": 0.6876884422110553,
+    "reais_fonte": "IMDB-WIKI (wiki.zip)",
+    "fakes_metodo": "SD v1.5 text-to-image + SD Inpainting",
+    "nota_cross_dataset": "Nenhum componente treinado em DFF. SwinV2→OpenFake, CLIP DF40→DF40, LR→DF40 EFS+FE."
+}

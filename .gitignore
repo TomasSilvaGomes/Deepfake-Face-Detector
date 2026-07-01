@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Pesos 
+models/*.pth
+models/*.safetensors
+
+
+# Estudo das redes
+*.zip
+estudo_redes/**/*.png 
+estudo_redes/**/*.jpg
+estudo_redes/**/*.jpeg
+
+*.task
+*.streamlit

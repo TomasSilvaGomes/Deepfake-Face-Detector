@@ -1,0 +1,36 @@
+==================================================
+RELATÓRIO DE CALIBRAÇÃO - CLASSIFICADOR DE FUSÃO 3D
+==================================================
+
+1. RESUMO DO CONJUNTO DE DADOS
+--------------------------------------------------
+Total de Amostras  : 6608
+Classe Real (0)    : 3400
+Classe Fake (1)    : 3208
+
+2. DESEMPENHO GLOBAL DO MODELO
+--------------------------------------------------
+AUC (Área Sob ROC) : 0.8997
+Accuracy Global    : 84.20%
+Limiar de Decisão  : 0.6877
+
+3. ANÁLISE DE ERRO (Limiar Ótimo: 0.6877)
+--------------------------------------------------
+Falsos Positivos   : 652 (Reais classificados como Fakes)
+Falsos Negativos   : 392 (Fakes classificados como Reais)
+
+4. PARÂMETROS DA REGRESSÃO LOGÍSTICA
+--------------------------------------------------
+Nota: pesos directos sobre features em escala natural
+(prob_swin ∈ [0,1], prob_df40 ∈ [0,1], z_score ∈ ℝ)
+Sem StandardScaler — compatível com app.py.
+
+w_swin (SwinV2)    : 4.6758
+w_df40 (CLIP-DF40) : 4.1875
+w_z    (Z-Score)   : -0.1055
+Bias / Interceção  : -3.0065
+
+Equação de Transferência Algébrica:
+logit = (P_swin × 4.6758) + (P_clip × 4.1875) + (Z × -0.1055) + (-3.0065)
+P(Fake) = sigmoid(logit) = 1 / (1 + e^-logit)
+==================================================
