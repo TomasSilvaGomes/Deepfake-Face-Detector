@@ -5,13 +5,12 @@
 [![HuggingFace Space](https://img.shields.io/badge/🤗%20HuggingFace-Space-yellow)](https://huggingface.co/spaces/liamu/DeepFakes-Detection)
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.41.0-red)](https://streamlit.io/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
 ## Demonstração
 
-Acede à demonstração pública em: [huggingface.co/spaces/liamu/DeepFakes-Detection](https://huggingface.co/spaces/liamu/DeepFakes-Detection)
+Acede à demonstração pública em: [huggingface.co/spaces/liamu/Deepfake-Face-Detector](https://huggingface.co/spaces/liamu/Deepfake-Face-Detector)
 
 ---
 
