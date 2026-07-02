@@ -1,0 +1,101 @@
+{
+  "best_score": 0.6426156772210789,
+  "best_params": {
+    "cand_pct": 0.4,
+    "cand_floor": 0.1,
+    "kernel_thin": 5,
+    "iters_thin": 3,
+    "kernel_wide": 3,
+    "iters_wide": 1,
+    "pct_thin": 70,
+    "pct_wide": 85,
+    "min_floor": 0.05,
+    "min_dens_large": 0.04,
+    "min_dens_small": 0.01
+  },
+  "top5": [
+    {
+      "score": 0.6426156772210789,
+      "params": {
+        "cand_pct": 0.4,
+        "cand_floor": 0.1,
+        "kernel_thin": 5,
+        "iters_thin": 3,
+        "kernel_wide": 3,
+        "iters_wide": 1,
+        "pct_thin": 70,
+        "pct_wide": 85,
+        "min_floor": 0.05,
+        "min_dens_large": 0.04,
+        "min_dens_small": 0.01
+      }
+    },
+    {
+      "score": 0.6426156772210789,
+      "params": {
+        "cand_pct": 0.4,
+        "cand_floor": 0.1,
+        "kernel_thin": 5,
+        "iters_thin": 3,
+        "kernel_wide": 3,
+        "iters_wide": 1,
+        "pct_thin": 70,
+        "pct_wide": 85,
+        "min_floor": 0.05,
+        "min_dens_large": 0.04,
+        "min_dens_small": 0.02
+      }
+    },
+    {
+      "score": 0.6426156772210789,
+      "params": {
+        "cand_pct": 0.4,
+        "cand_floor": 0.1,
+        "kernel_thin": 5,
+        "iters_thin": 3,
+        "kernel_wide": 3,
+        "iters_wide": 1,
+        "pct_thin": 70,
+        "pct_wide": 85,
+        "min_floor": 0.05,
+        "min_dens_large": 0.04,
+        "min_dens_small": 0.04
+      }
+    },
+    {
+      "score": 0.6426156772210789,
+      "params": {
+        "cand_pct": 0.4,
+        "cand_floor": 0.1,
+        "kernel_thin": 5,
+        "iters_thin": 3,
+        "kernel_wide": 3,
+        "iters_wide": 1,
+        "pct_thin": 70,
+        "pct_wide": 85,
+        "min_floor": 0.05,
+        "min_dens_large": 0.06,
+        "min_dens_small": 0.01
+      }
+    },
+    {
+      "score": 0.6426156772210789,
+      "params": {
+        "cand_pct": 0.4,
+        "cand_floor": 0.1,
+        "kernel_thin": 5,
+        "iters_thin": 3,
+        "kernel_wide": 3,
+        "iters_wide": 1,
+        "pct_thin": 70,
+        "pct_wide": 85,
+        "min_floor": 0.05,
+        "min_dens_large": 0.06,
+        "min_dens_small": 0.02
+      }
+    }
+  ],
+  "n_images": 98,
+  "n_combos": 52488,
+  "alpha": 0.5
+}

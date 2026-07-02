@@ -1,5 +1,6 @@
 """
-artifact_zones.py — versão de alta precisão (sobreposição estrita com H_isolamento)
+artifact_zones.py — parâmetros optimizados por grid search
+(otimizar_explicabilidade.py, N=60 imagens FAKE_EFS, score=0.6426)
 """
 
 from dataclasses import dataclass
@@ -19,14 +20,16 @@ class ArtifactZone:
     description: str = ""
 
 
+# Regiões anatomicamente finas — precisam de dilatação maior
+THIN_REGIONS = {"olho_esq", "olho_dir", "sobrancelha_esq", "sobrancelha_dir", "boca"}
+
+
 def extract_artifact_zones(
     img_rgb: np.ndarray,
     heatmap: np.ndarray,
     region_masks: dict,
     region_scores: dict,
     bbox_padding: int = 12,
-    local_percentile: float = 60,   
-    min_floor: float = 0.20,        
 ) -> List[ArtifactZone]:
 
     h, w = img_rgb.shape[:2]
@@ -40,18 +43,17 @@ def extract_artifact_zones(
     if max_score < 0.05:
         return []
 
+    cand_thresh = max(max_score * 0.40, 0.10)
     candidates = [
         (name, data["contrast"])
         for name, data in region_scores.items()
-        if data["contrast"] >= (max_score * 0.30)   
+        if data["contrast"] >= cand_thresh
         and name not in ["pele", "cabelo", "pescoco"]
     ]
     candidates.sort(key=lambda x: x[1], reverse=True)
 
     zones: List[ArtifactZone] = []
     h_h, w_h = heatmap.shape
-
-    THIN_REGIONS = {"olho_esq", "olho_dir", "sobrancelha_esq", "sobrancelha_dir", "boca"}
 
     for name, score in candidates:
         mask_f = region_masks.get(name)
@@ -60,15 +62,15 @@ def extract_artifact_zones(
 
         mask_f_resized = cv2.resize(mask_f, (w_h, h_h), interpolation=cv2.INTER_NEAREST)
 
-        # Dilatação adaptativa: maior para regiões finas, menor para regiões largas
+        # Dilatação adaptativa 
         if name in THIN_REGIONS:
-            kernel = np.ones((7, 7), np.uint8)
-            iterations = 2
-            percentile = 60
+            kernel     = np.ones((5, 5), np.uint8)   
+            iterations = 3                            
+            percentile = 70                            
         else:
-            kernel = np.ones((3, 3), np.uint8)
-            iterations = 1
-            percentile = 75
+            kernel     = np.ones((3, 3), np.uint8)    
+            iterations = 1                             
+            percentile = 85                            
 
         region_bin = cv2.dilate(
             (mask_f_resized > 0.3).astype(np.uint8), kernel, iterations=iterations
@@ -77,21 +79,22 @@ def extract_artifact_zones(
         if not region_bin.any():
             continue
 
+        # Threshold adaptativo local com piso de 0.05 (era 0.20)
         region_heatmap_vals = heatmap[region_bin]
         local_thresh = max(
             np.percentile(region_heatmap_vals, percentile),
-            min_floor
+            0.05
         )
         zone_specific_mask = (heatmap >= local_thresh) & region_bin
 
         if not zone_specific_mask.any():
             continue
-        
+
+        # Filtro de densidade
         region_area = int(region_bin.sum())
         zone_area   = int(zone_specific_mask.sum())
         density     = zone_area / (region_area + 1e-6)
 
-        # Regiões grandes (bochechas) precisam de densidade mínima maior
         min_density = 0.06 if region_area > 3000 else 0.02
         if density < min_density:
             continue
@@ -109,12 +112,15 @@ def extract_artifact_zones(
             centroid=(int(xs.mean()), int(ys.mean())),
             mask_bin=zone_specific_mask,
             description=(
-                f"Artefactos isolados na anatomia '{name}' (threshold local={local_thresh:.3f}). "
+                f"Artefactos isolados na anatomia '{name}' "
+                f"(threshold local={local_thresh:.3f}, "
+                f"densidade={density:.3f}). "
                 f"Gravidade: {score:.3f}."
             ),
         ))
 
     return zones
+
 
 def segment_zones_with_probability(
     heatmap_contrastive: np.ndarray,
