@@ -22,7 +22,7 @@ Este sistema deteta e explica manipulações faciais sintéticas (deepfakes) atr
 Classificador baseado em SwinV2 para deteção de artefactos de textura, com extracção facial via MediaPipe.
 
 **Fase 2 — Explicabilidade Espacial**
-Mapas de calor contrastivos via CLIP Surgery e segmentação anatómica facial via BiSeNet (19 regiões), permitindo localizar espacialmente as anomalias detetadas.
+Mapas de calor contrastivos via CLIP Surgery e segmentação anatómica facial via BiSeNet, permitindo localizar espacialmente as anomalias detetadas.
 
 **Fase 3 — Fusão Multimodal e Relatório Automático**
 Fusão de três sinais independentes (SwinV2, CLIP DF-40, Z-score espacial) através de uma Regressão Logística treinada. Geração automática de relatórios em linguagem natural via API Gemini.
