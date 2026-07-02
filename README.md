@@ -65,14 +65,16 @@ Deepfake-Face-Detector/
 │   └── analise_zips.py             # Preparação do dataset DF40
 │
 ├── estudo_redes/
-│   ├── test_redes_treino_lr.py     # Treino do classificador de fusão
-│   ├── comparacao_bench.py         # Comparação com DF40 Protocol-3
-│   └── avaliar_DeepFakeFace.py     # Avaliação externa (DeepFakeFace)
+│   ├── test_redes_treino_lr.py      # Treino do classificador de fusão
+│   ├── comparacao_bench.py          # Comparação com DF40 Protocol-3
+│   ├── otimizar_explicabilidade.py  # Otimizar os parâmetros da explicabilidade (Sobreposicao da segmentacao com mapas de calor)
+│   └── avaliar_DeepFakeFace.py      # Avaliação externa (DeepFakeFace)
 │
 ├── results/
 │   ├── fusion_metrics_dashboard.png
 │   ├── comparacao_Protocol_3.png
 │   ├── comparison_summary.json
+│   ├── params_explicabilidade.json
 │   └── evaluation_deepfakeface.json
 │
 ├── requirements.txt                # Dependências para desenvolvimento local
